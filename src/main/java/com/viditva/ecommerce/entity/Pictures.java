@@ -1,0 +1,43 @@
+package com.viditva.ecommerce.entity;
+
+import javax.persistence.*;
+import java.io.Serializable;
+
+@Entity
+@Table(name = "pictures")
+public class Pictures implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private int pictureId;
+
+//    @ManyToOne(mappedBy = "products")
+    private Product product;
+
+    @Column(name = "picture")
+    private String picture;
+
+    public int getPictureId() {
+        return pictureId;
+    }
+
+    public void setPictureId(int pictureId) {
+        this.pictureId = pictureId;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+}
