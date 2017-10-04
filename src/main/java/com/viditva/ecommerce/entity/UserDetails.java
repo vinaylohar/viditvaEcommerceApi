@@ -26,16 +26,16 @@ public class UserDetails  implements Serializable{
     private String emailaddress;
 
 
-    @OneToMany(mappedBy="userdetails")
-    private Set<Reviews> reviews;
+  /*  @OneToMany(mappedBy="userdetails")
+    private Set<Review> reviews;
 
-    public Set<Reviews> getReviews() {
+    public Set<Review> getReviews() {
         return reviews;
     }
 
-    public void setReviews(Set<Reviews> reviews) {
+    public void setReviews(Set<Review> reviews) {
         this.reviews = reviews;
-    }
+    }*/
 
 //    private Set<UserType> userTypes = new HashSet<UserType>(0);
 

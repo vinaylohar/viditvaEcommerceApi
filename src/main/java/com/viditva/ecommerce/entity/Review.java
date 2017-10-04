@@ -5,19 +5,19 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "reviews")
-public class Reviews implements Serializable {
+public class Review implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int reviewId;
 
-    @ManyToOne
-    @JoinColumn(name="productid", nullable=false)
+   /* @ManyToOne
+    @JoinColumn(name="products_id")
     private Product product;
-
-    @ManyToOne
+*/
+/*    @ManyToOne
     @JoinColumn(name="userid", nullable=false)
-    private UserDetails userdetails;
+    private UserDetails userdetails;*/
 
     @Column(name = "title")
     private String title;
@@ -28,6 +28,18 @@ public class Reviews implements Serializable {
     @Column(name = "rating")
     private int rating;
 
+    @Column(name = "products_id")
+    private int productid;
+    public int getProductid() {
+        return productid;
+    }
+
+    public void setProductid(int productid) {
+        this.productid = productid;
+    }
+
+
+
     public int getReviewId() {
         return reviewId;
     }
@@ -36,21 +48,21 @@ public class Reviews implements Serializable {
         this.reviewId = reviewId;
     }
 
-    public Product getProduct() {
+    /*public Product getProduct() {
         return product;
     }
 
     public void setProduct(Product product) {
         this.product = product;
     }
-
-    public UserDetails getUserdetails() {
+*/
+  /*  public UserDetails getUserdetails() {
         return userdetails;
     }
 
     public void setUserdetails(UserDetails userdetails) {
         this.userdetails = userdetails;
-    }
+    }*/
 
     public String getTitle() {
         return title;

@@ -22,14 +22,15 @@ public class Product implements Serializable {
     private int discount;
     @Column(name = "unitsinstock")
     private int unitsinstock;
-    @OneToMany(mappedBy="product")
-    private Set<Reviews> reviews;
 
-    public Set<Reviews> getReviews() {
+    @OneToMany(mappedBy="productid", cascade=CascadeType.ALL)
+    private Set<Review> reviews;
+
+    public Set<Review> getReviews() {
         return reviews;
     }
 
-    public void setReviews(Set<Reviews> reviews) {
+    public void setReviews(Set<Review> reviews) {
         this.reviews = reviews;
     }
 

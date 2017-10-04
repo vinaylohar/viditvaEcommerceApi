@@ -20,14 +20,14 @@ public class ProductController {
     @Autowired
     private ProductRepository productRepository;
 
-    @RequestMapping(method = RequestMethod.GET,value = "test/{id}")
+    @RequestMapping(method = RequestMethod.GET,value = "{id}")
     public Product getProductById(@PathVariable("id") Integer id) {
 //        Product product = productService.getProductById(id);
         System.out.println("getProductById called!!!");
         return productRepository.findOne(id);
     }
 
-    @RequestMapping(method = RequestMethod.GET,value = "/test")
+    @RequestMapping(method = RequestMethod.GET,value = "")
     public List<Product> getAllProducts() {
         System.out.println("Get all products called!!!");
 //        List<Product> list = productService.getAllProducts();
@@ -36,14 +36,14 @@ public class ProductController {
         return list;
     }
 
-    @RequestMapping(method = RequestMethod.POST,value ="test")
+    @RequestMapping(method = RequestMethod.POST,value ="")
     public Product addProduct(@RequestBody Product product) {
         System.out.println("addProduct called!!! " + product);
         productRepository.save(product);
         return product;
     }
 
-    @RequestMapping(method = RequestMethod.PUT,value ="test")
+    @RequestMapping(method = RequestMethod.PUT,value ="")
     public Product updateProduct(@RequestBody Product product) {
         System.out.println("updateProduct called!!!" + product);
         Product p = productRepository.findOne(product.getProductid());
@@ -56,7 +56,7 @@ public class ProductController {
         return p;
     }
 
-    @RequestMapping(method = RequestMethod.DELETE,value ="test/{id}")
+    @RequestMapping(method = RequestMethod.DELETE,value ="{id}")
     public String deleteProduct(@PathVariable("id") Integer id) {
         System.out.println("deleteProduct called!!!" + id);
         productRepository.delete(id);
