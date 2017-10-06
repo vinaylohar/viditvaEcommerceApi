@@ -1,11 +1,18 @@
 package com.viditva.ecommerce.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.*;
 
 @Entity
 @Table(name = "products")
+/*@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")*/
 public class Product implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -23,7 +30,10 @@ public class Product implements Serializable {
     @Column(name = "unitsinstock")
     private int unitsinstock;
 
-    @OneToMany(mappedBy="productid", cascade=CascadeType.ALL)
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @Column(nullable = true)
+//    @JsonManagedReference
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "reviewId")
     private Set<Review> reviews;
 
     public Set<Review> getReviews() {
@@ -34,18 +44,22 @@ public class Product implements Serializable {
         this.reviews = reviews;
     }
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "productcategorymapping", joinColumns = {
+            @JoinColumn(name = "products_id", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "productcategory_id",
+                    nullable = false, updatable = false)})
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "productCategoryId")
+    private Set<ProductCategory> productCategories;
 
-    @Override
-    public String toString() {
-        return "Product{" +
-                "productid=" + productid +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", price=" + price +
-                ", discount=" + discount +
-                ", unitsinstock=" + unitsinstock +
-                '}';
+    public Set<ProductCategory> getProductCategories() {
+        return productCategories;
     }
+
+    public void setProductCategories(Set<ProductCategory> productCategories) {
+        this.productCategories = productCategories;
+    }
+
 
     public int getProductid() {
         return productid;

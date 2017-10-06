@@ -1,20 +1,36 @@
 package com.viditva.ecommerce.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "reviews")
+/*@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")*/
 public class Review implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int reviewId;
 
-   /* @ManyToOne
+//    @JsonBackReference
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name="products_id")
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="productid")
     private Product product;
-*/
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
 /*    @ManyToOne
     @JoinColumn(name="userid", nullable=false)
     private UserDetails userdetails;*/
@@ -28,7 +44,7 @@ public class Review implements Serializable {
     @Column(name = "rating")
     private int rating;
 
-    @Column(name = "products_id")
+    /*@Column(name = "products_id")
     private int productid;
     public int getProductid() {
         return productid;
@@ -36,7 +52,7 @@ public class Review implements Serializable {
 
     public void setProductid(int productid) {
         this.productid = productid;
-    }
+    }*/
 
 
 
@@ -48,14 +64,6 @@ public class Review implements Serializable {
         this.reviewId = reviewId;
     }
 
-    /*public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-*/
   /*  public UserDetails getUserdetails() {
         return userdetails;
     }
