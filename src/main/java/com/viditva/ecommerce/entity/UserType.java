@@ -1,5 +1,7 @@
 package com.viditva.ecommerce.entity;
 
+import com.viditva.ecommerce.serializer.LevelSerializable;
+
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "usertype")
-public class UserType implements Serializable{
+public class UserType implements LevelSerializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
@@ -44,4 +46,7 @@ public class UserType implements Serializable{
         this.description = description;
     }
 
+    public int getLevel(){
+        return LevelSerializable.DEFAULT_LEVEL;
+    }
 }

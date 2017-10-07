@@ -3,6 +3,7 @@ package com.viditva.ecommerce.entity;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.viditva.ecommerce.serializer.LevelSerializable;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -13,7 +14,7 @@ import javax.persistence.*;
 /*@JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "id")*/
-public class Product implements Serializable {
+public class Product implements LevelSerializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -109,4 +110,7 @@ public class Product implements Serializable {
         this.unitsinstock = unitsinstock;
     }
 
+    public int getLevel(){
+        return LevelSerializable.DEFAULT_LEVEL;
+    }
 }

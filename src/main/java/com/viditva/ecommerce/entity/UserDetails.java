@@ -1,4 +1,6 @@
 package com.viditva.ecommerce.entity;
+import com.viditva.ecommerce.serializer.LevelSerializable;
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -6,7 +8,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="userdetails")
-public class UserDetails  implements Serializable{
+public class UserDetails  implements LevelSerializable{
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -103,5 +105,9 @@ public class UserDetails  implements Serializable{
 
     public void setEmailaddress(String emailaddress) {
         this.emailaddress = emailaddress;
+    }
+
+    public int getLevel(){
+        return LevelSerializable.DEFAULT_LEVEL;
     }
 }

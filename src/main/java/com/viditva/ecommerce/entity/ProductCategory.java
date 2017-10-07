@@ -2,6 +2,7 @@ package com.viditva.ecommerce.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.viditva.ecommerce.serializer.LevelSerializable;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -9,7 +10,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "productcategory")
-public class ProductCategory implements Serializable{
+public class ProductCategory implements LevelSerializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
@@ -51,5 +52,10 @@ public class ProductCategory implements Serializable{
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getLevel(){
+        System.out.println("Getting Level");
+        return LevelSerializable.DEFAULT_LEVEL;
     }
 }
